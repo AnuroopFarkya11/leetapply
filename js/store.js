@@ -9,21 +9,11 @@ const Store = {
     // ── Profile ──
     getProfile() {
         const data = localStorage.getItem(this.KEYS.PROFILE);
-        if (data) return JSON.parse(data);
-        // Default profile
-        const defaultProfile = {
-            name: 'Anuroop Farkya',
-            username: 'anuroopfarkya',
-            company: 'TCS',
-            role: 'System Engineer',
-            location: 'India',
-            university: 'Medi-Caps University',
-            target: 'SDE @ Product Company',
-            github: 'anuroopfarkya11',
-            skills: ['JavaScript', 'React', 'Node.js', 'Python', 'DSA', 'SQL'],
-        };
-        this.saveProfile(defaultProfile);
-        return defaultProfile;
+        return data ? JSON.parse(data) : null;
+    },
+
+    hasProfile() {
+        return localStorage.getItem(this.KEYS.PROFILE) !== null;
     },
 
     saveProfile(profile) {

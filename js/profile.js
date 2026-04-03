@@ -20,33 +20,35 @@ const ProfilePage = {
 
     renderProfile() {
         const profile = Store.getProfile();
+        if (!profile) return; // onboarding not completed yet
+
         const el = (id) => document.getElementById(id);
 
-        if (el('profile-name')) el('profile-name').textContent = profile.name;
+        if (el('profile-name')) {
+            // Preserve the verified badge SVG
+            const svg = el('profile-name').querySelector('svg');
+            el('profile-name').textContent = profile.name;
+            if (svg) el('profile-name').appendChild(svg);
+        }
         if (el('profile-username')) el('profile-username').textContent = profile.username;
-        if (el('profile-company')) el('profile-company').textContent = `${profile.company} | ${profile.role}`;
-        if (el('profile-location')) el('profile-location').textContent = profile.location;
-        if (el('profile-university')) el('profile-university').textContent = profile.university;
-        if (el('profile-target')) el('profile-target').textContent = `Target: ${profile.target}`;
-        if (el('profile-github')) el('profile-github').textContent = profile.github;
+        if (el('profile-company')) el('profile-company').textContent = profile.company && profile.role ? `${profile.company} | ${profile.role}` : (profile.company || profile.role || '');
+        if (el('profile-location')) el('profile-location').textContent = profile.location || '';
+        if (el('profile-university')) el('profile-university').textContent = profile.university || '';
+        if (el('profile-target')) el('profile-target').textContent = profile.target ? `Target: ${profile.target}` : '';
+        if (el('profile-github')) el('profile-github').textContent = profile.github || '';
 
         const skillsEl = el('profile-skills');
-        if (skillsEl) {
+        if (skillsEl && profile.skills && profile.skills.length > 0) {
             skillsEl.innerHTML = profile.skills
                 .map(s => `<span class="skill-tag">${s}</span>`).join('');
         }
 
         // Avatar initials
+        const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase();
         const avatarEl = document.querySelector('.profile-avatar');
-        if (avatarEl) {
-            const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase();
-            avatarEl.textContent = initials;
-        }
+        if (avatarEl) avatarEl.textContent = initials;
         const navAvatar = document.querySelector('.navbar-avatar');
-        if (navAvatar) {
-            const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase();
-            navAvatar.textContent = initials;
-        }
+        if (navAvatar) navAvatar.textContent = initials;
     },
 
     renderRing(stats) {
@@ -92,8 +94,10 @@ const ProfilePage = {
         if (el('stat-current-streak')) el('stat-current-streak').textContent = stats.currentStreak;
 
         // Community stats
+        if (el('stat-community-active')) el('stat-community-active').textContent = stats.totalActiveDays;
         if (el('stat-interviews')) el('stat-interviews').textContent = stats.statusCounts.interview;
         if (el('stat-offers')) el('stat-offers').textContent = stats.statusCounts.offer;
+        if (el('stat-rejections')) el('stat-rejections').textContent = stats.statusCounts.rejected;
     },
 
     renderBadges(stats) {
