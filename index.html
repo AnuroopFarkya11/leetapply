@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeetApply</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/profile.css">
+<link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+<div class="tooltip" id="tooltip"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="index.html" class="navbar-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffa116"><path d="M20 6H4V4h16v2zm-4 6H4v-2h12v2zm-2 6H4v-2h10v2z"/></svg>
+        LeetApply
+    </a>
+    <div class="navbar-links">
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="applications.html">Applications</a>
+        <a href="#">Pipeline</a>
+        <a href="#">Analytics</a>
+    </div>
+    <div class="navbar-right">
+        <button class="navbar-add-btn" data-action="open-add-modal">+ Add Application</button>
+        <div class="search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <span>Search</span>
+        </div>
+        <div class="navbar-avatar">AF</div>
+    </div>
+</nav>
+
+<!-- Streak Warning Banner -->
+<div class="streak-banner" id="streak-banner" style="display:none">
+    <span class="streak-fire"></span>
+    <span id="streak-message"></span>
+    <button class="streak-btn" data-action="open-add-modal">Apply Now</button>
+    <button class="streak-dismiss" onclick="document.getElementById('streak-banner').style.display='none'">&times;</button>
+</div>
+
+<!-- Main -->
+<div class="main-container">
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+        <div class="card profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">AF</div>
+                <div class="profile-name" id="profile-name">Anuroop Farkya
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <div class="profile-username" id="profile-username">anuroopfarkya</div>
+                <div class="profile-rank">Rank: <strong>12,847</strong></div>
+                <div class="profile-follow-row">
+                    <span><strong>6</strong> Following</span>
+                    <span><strong>2</strong> Followers</span>
+                </div>
+                <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+            <div class="profile-details">
+                <div class="profile-detail"><svg viewBox="0 0 24 24"><path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5z"/></svg><span id="profile-company">TCS | System Engineer</span></div>
+                <div class="profile-detail"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><span id="profile-location">India</span></div>
+                <div class="profile-detail"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg><span id="profile-university">Medi-Caps University</span></div>
+                <div class="profile-detail"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span id="profile-target">Target: SDE @ Product Company</span></div>
+                <div class="profile-detail"><svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17 4.7 18 5 18 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg><span id="profile-github">anuroopfarkya11</span></div>
+            </div>
+            <div class="profile-skills">
+                <div class="skills-tags" id="profile-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">DSA</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card community-stats">
+            <h3>Community Stats</h3>
+            <div class="stat-row"><span class="stat-dot" style="background:#4fc3f7"></span><span class="stat-label">Profile Views</span><span class="stat-sub">Last week</span><span class="stat-value">1.3K</span></div>
+            <div class="stat-row"><span class="stat-dot" style="background:#00af9b"></span><span class="stat-label">Interviews</span><span class="stat-sub">Total</span><span class="stat-value" id="stat-interviews">0</span></div>
+            <div class="stat-row"><span class="stat-dot" style="background:#ffa116"></span><span class="stat-label">Offers</span><span class="stat-sub">Total</span><span class="stat-value" id="stat-offers">0</span></div>
+            <div class="stat-row"><span class="stat-dot" style="background:#ef4743"></span><span class="stat-label">Reputation</span><span class="stat-sub">Last week</span><span class="stat-value">142</span></div>
+        </div>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="content">
+        <div class="top-row">
+            <!-- Progress Ring -->
+            <div class="card progress-card">
+                <div class="ring-container">
+                    <svg viewBox="0 0 140 140" width="140" height="140">
+                        <circle cx="70" cy="70" r="58" fill="none" stroke="#f2f3f5" stroke-width="7"/>
+                        <circle class="ring-arc" cx="70" cy="70" r="58" fill="none" stroke="#ef4743" stroke-width="7"
+                            stroke-dasharray="364.4" stroke-dashoffset="364.4" transform="rotate(-90 70 70)" stroke-linecap="round"/>
+                        <circle class="ring-arc" cx="70" cy="70" r="58" fill="none" stroke="#ffb800" stroke-width="7"
+                            stroke-dasharray="364.4" stroke-dashoffset="364.4" transform="rotate(-90 70 70)" stroke-linecap="round"/>
+                        <circle class="ring-arc" cx="70" cy="70" r="58" fill="none" stroke="#00af9b" stroke-width="7"
+                            stroke-dasharray="364.4" stroke-dashoffset="364.4" transform="rotate(-90 70 70)" stroke-linecap="round"/>
+                    </svg>
+                    <div class="ring-center-text">
+                        <div class="ring-count" id="ring-count">0</div>
+                        <div class="ring-total">/500</div>
+                        <div class="ring-label" id="ring-label">Applied</div>
+                    </div>
+                </div>
+                <div class="difficulty-breakdown">
+                    <div class="diff-row">
+                        <span class="diff-label diff-easy">Easy</span>
+                        <div class="diff-bar-wrap"><div class="diff-bar" id="bar-easy" style="width:0%;background:#00af9b"></div></div>
+                        <span class="diff-count" id="count-easy">0<span class="diff-total">/200</span></span>
+                    </div>
+                    <div class="diff-row">
+                        <span class="diff-label diff-medium">Medium</span>
+                        <div class="diff-bar-wrap"><div class="diff-bar" id="bar-medium" style="width:0%;background:#ffb800"></div></div>
+                        <span class="diff-count" id="count-medium">0<span class="diff-total">/200</span></span>
+                    </div>
+                    <div class="diff-row">
+                        <span class="diff-label diff-hard">Hard</span>
+                        <div class="diff-bar-wrap"><div class="diff-bar" id="bar-hard" style="width:0%;background:#ef4743"></div></div>
+                        <span class="diff-count" id="count-hard">0<span class="diff-total">/100</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="card badges-card">
+                <div class="badges-header">
+                    <span class="badges-title">Badges</span>
+                    <span class="badges-count" id="badges-count">0</span>
+                    <svg class="badges-arrow" width="16" height="16" viewBox="0 0 24 24" fill="#a3a3a3"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </div>
+                <div class="badges-grid" id="badges-grid">
+                    <div style="color:var(--text-muted);font-size:13px;padding:16px;">Apply consistently to earn badges!</div>
+                </div>
+                <div class="badge-recent" id="badge-recent">No badges yet</div>
+            </div>
+        </div>
+
+        <!-- Heatmap -->
+        <div class="card heatmap-card">
+            <div class="heatmap-header">
+                <div class="heatmap-title">
+                    <strong id="stat-total-apps">0</strong>
+                    <span>applications in the past one year</span>
+                    <span class="heatmap-info">?</span>
+                </div>
+                <div class="heatmap-stats">
+                    <span>Total active days: <strong id="stat-active-days">0</strong></span>
+                    <span>Max streak: <strong id="stat-max-streak">0</strong></span>
+                    <span class="current-dropdown">Current <svg width="10" height="10" viewBox="0 0 24 24" fill="#999"><path d="M7 10l5 5 5-5z"/></svg></span>
+                </div>
+            </div>
+            <div class="heatmap-container">
+                <svg id="heatmap" width="760" height="112"></svg>
+            </div>
+            <div class="heatmap-legend">
+                <span>Less</span>
+                <div class="legend-box" style="background:#f0f0f0"></div>
+                <div class="legend-box" style="background:#9be9a8"></div>
+                <div class="legend-box" style="background:#40c463"></div>
+                <div class="legend-box" style="background:#30a14e"></div>
+                <div class="legend-box" style="background:#216e39"></div>
+                <span>More</span>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card activity-card">
+            <div class="activity-tabs-row">
+                <div class="activity-tabs">
+                    <button class="activity-tab active" data-tab="applications">Recent Applications</button>
+                    <button class="activity-tab" data-tab="interviews">Interviews</button>
+                    <button class="activity-tab" data-tab="offers">Offers</button>
+                    <button class="activity-tab" data-tab="rejections">Rejections</button>
+                </div>
+                <a href="applications.html" class="view-all">View all applications &gt;</a>
+            </div>
+            <ul class="activity-list" id="activity-list"></ul>
+        </div>
+    </div>
+</div>
+
+<!-- Add Application Modal -->
+<div class="overlay" id="add-modal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Add Application</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <form class="modal-form" id="add-app-form">
+            <div class="form-group">
+                <label>Company <span class="required">*</span></label>
+                <input type="text" name="company" class="form-input" placeholder="e.g. Google" required>
+            </div>
+            <div class="form-group">
+                <label>Role / Position <span class="required">*</span></label>
+                <input type="text" name="role" class="form-input" placeholder="e.g. SDE-2, Backend">
+            </div>
+            <div class="form-group">
+                <label>Difficulty</label>
+                <div class="diff-radio-group">
+                    <div class="diff-radio">
+                        <input type="radio" name="difficulty" value="easy" id="diff-easy">
+                        <label for="diff-easy" class="label-easy">Easy</label>
+                    </div>
+                    <div class="diff-radio">
+                        <input type="radio" name="difficulty" value="medium" id="diff-medium" checked>
+                        <label for="diff-medium" class="label-medium">Medium</label>
+                    </div>
+                    <div class="diff-radio">
+                        <input type="radio" name="difficulty" value="hard" id="diff-hard">
+                        <label for="diff-hard" class="label-hard">Hard</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Platform</label>
+                    <select name="platform" class="form-input">
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="naukri">Naukri</option>
+                        <option value="indeed">Indeed</option>
+                        <option value="internshala">Internshala</option>
+                        <option value="wellfound">Wellfound</option>
+                        <option value="direct">Direct / Career Page</option>
+                        <option value="referral">Referral</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date Applied</label>
+                    <input type="date" name="dateApplied" class="form-input">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Job Link</label>
+                <input type="url" name="link" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea name="notes" class="form-input" placeholder="Any notes about this application..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Add Application</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/profile.js"></script>
+<script>
+// Set default date to today
+document.querySelector('input[name="dateApplied"]').value = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>

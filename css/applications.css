@@ -1,0 +1,107 @@
+/* ── Applications Page ── */
+.apps-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+}
+.apps-header h1 { font-size: 20px; font-weight: 700; }
+.apps-count { font-size: 13px; color: var(--text-muted); font-weight: 400; margin-left: 8px; }
+
+/* ── Filters Bar ── */
+.filters-bar {
+    display: flex; gap: 10px; align-items: center;
+    margin-bottom: 16px; flex-wrap: wrap;
+}
+.filter-search {
+    flex: 1; min-width: 200px; padding: 8px 14px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; font-family: inherit; color: var(--text-primary);
+    background: var(--card);
+}
+.filter-search:focus {
+    outline: none; border-color: var(--easy);
+    box-shadow: 0 0 0 3px rgba(0,175,155,0.08);
+}
+.filter-select {
+    padding: 8px 32px 8px 12px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 13px; font-family: inherit;
+    color: var(--text-secondary); background: var(--card);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='%23999'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+.filter-select:focus { outline: none; border-color: var(--easy); }
+
+/* ── Applications Table ── */
+.apps-table-wrap {
+    background: var(--card);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+.apps-table {
+    width: 100%; border-collapse: collapse;
+}
+.apps-table thead th {
+    padding: 12px 16px; text-align: left;
+    font-size: 12px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.3px;
+    background: var(--subtle-bg);
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+}
+.apps-table tbody tr {
+    border-bottom: 1px solid #f7f8fa;
+    transition: background 0.1s;
+}
+.apps-table tbody tr:hover { background: var(--hover-bg); }
+.apps-table tbody tr:last-child { border-bottom: none; }
+.apps-table td {
+    padding: 14px 16px; font-size: 13px;
+    vertical-align: middle;
+}
+.app-company { font-weight: 500; color: var(--text-primary); }
+.app-role { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+.app-link {
+    color: var(--status-applied); font-size: 12px;
+}
+.app-link:hover { text-decoration: underline; }
+.app-date { color: var(--text-muted); font-size: 12px; white-space: nowrap; }
+
+/* Status dropdown */
+.status-select {
+    padding: 4px 8px; border-radius: 10px; font-size: 11px;
+    font-weight: 500; border: none; cursor: pointer;
+    font-family: inherit;
+}
+.status-select.applied { background: var(--status-applied-bg); color: var(--status-applied); }
+.status-select.screening { background: var(--status-screening-bg); color: var(--status-screening); }
+.status-select.interview { background: var(--status-interview-bg); color: var(--status-interview); }
+.status-select.offer { background: var(--status-offer-bg); color: var(--status-offer); }
+.status-select.rejected { background: var(--status-rejected-bg); color: var(--status-rejected); }
+
+/* Actions */
+.app-actions { display: flex; gap: 6px; }
+.app-delete-btn {
+    width: 28px; height: 28px; border-radius: 6px;
+    border: none; background: none; color: var(--text-light);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; font-size: 16px;
+}
+.app-delete-btn:hover { background: var(--status-rejected-bg); color: var(--status-rejected); }
+
+/* ── Empty State ── */
+.apps-empty {
+    text-align: center; padding: 60px 20px; color: var(--text-muted);
+}
+.apps-empty .empty-icon { font-size: 48px; margin-bottom: 12px; }
+.apps-empty h3 { font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+.apps-empty p { font-size: 13px; }
+.apps-empty .empty-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px; padding: 9px 20px;
+    background: var(--easy); color: #fff; border: none;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+}
+.apps-empty .empty-btn:hover { background: #009688; }

@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --bg: #f7f8fa;
+    --card: #fff;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
+    --card-radius: 10px;
+    --text-primary: #262626;
+    --text-secondary: #595959;
+    --text-muted: #a3a3a3;
+    --text-light: #c4c4c4;
+    --border: #ebebeb;
+    --hover-bg: #fafbfc;
+    --subtle-bg: #f7f8fa;
+    --easy: #00af9b;
+    --medium: #ffb800;
+    --hard: #ef4743;
+    --accent: #ffa116;
+    --ring-bg: #f2f3f5;
+    --status-applied-bg: #e8f4fd; --status-applied: #1890ff;
+    --status-screening-bg: #f3e8ff; --status-screening: #722ed1;
+    --status-interview-bg: #fff7e6; --status-interview: #d48806;
+    --status-offer-bg: #e6fffb; --status-offer: #08979c;
+    --status-rejected-bg: #fff1f0; --status-rejected: #f5222d;
+    --heatmap-0: #ebedf0;
+    --heatmap-1: #9be9a8;
+    --heatmap-2: #40c463;
+    --heatmap-3: #30a14e;
+    --heatmap-4: #216e39;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+ul { list-style: none; }
+
+/* ── Navbar ── */
+.navbar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+.navbar-logo {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-right: 4px;
+    white-space: nowrap;
+}
+.navbar-logo svg { flex-shrink: 0; }
+.navbar-links {
+    display: flex;
+    gap: 2px;
+    flex: 1;
+}
+.navbar-links a {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px 12px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+}
+.navbar-links a:hover { color: var(--text-primary); }
+.navbar-links a.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--subtle-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    min-width: 150px;
+}
+.navbar-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-add-btn {
+    background: var(--easy);
+    color: #fff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+.navbar-add-btn:hover { background: #009688; }
+
+/* ── Main Layout ── */
+.main-container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* Single column layout for applications page */
+.main-container.single-col {
+    grid-template-columns: 1fr;
+    max-width: 960px;
+}
+
+/* ── Card base ── */
+.card {
+    background: var(--card);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+}
+
+/* ── Status badges ── */
+.status-badge {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.status-applied { background: var(--status-applied-bg); color: var(--status-applied); }
+.status-screening { background: var(--status-screening-bg); color: var(--status-screening); }
+.status-interview { background: var(--status-interview-bg); color: var(--status-interview); }
+.status-offer { background: var(--status-offer-bg); color: var(--status-offer); }
+.status-rejected { background: var(--status-rejected-bg); color: var(--status-rejected); }
+
+/* ── Difficulty tags ── */
+.diff-tag { font-size: 11px; font-weight: 500; }
+.diff-tag.easy { color: var(--easy); }
+.diff-tag.medium { color: var(--medium); }
+.diff-tag.hard { color: var(--hard); }
+
+/* ── Tooltip ── */
+.tooltip {
+    position: fixed;
+    background: var(--text-primary);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 100;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ── Overlay ── */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.overlay.active { display: flex; }
+
+/* ── Streak Warning Banner ── */
+.streak-banner {
+    background: #fff7e6;
+    border-bottom: 1px solid #ffd88a;
+    padding: 10px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #d48806;
+}
+.streak-banner.danger {
+    background: #fff1f0;
+    border-bottom-color: #ffa39e;
+    color: #f5222d;
+}
+.streak-banner .streak-fire { font-size: 16px; }
+.streak-banner .streak-btn {
+    background: var(--easy); color: #fff; border: none;
+    padding: 5px 14px; border-radius: 6px; font-size: 12px;
+    font-weight: 600; margin-left: 8px;
+}
+.streak-banner .streak-btn:hover { background: #009688; }
+.streak-banner .streak-dismiss {
+    background: none; border: none; color: var(--text-muted);
+    font-size: 18px; margin-left: 8px; padding: 0 4px;
+}
+
+/* ── Stats Cards Row ── */
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.stat-card {
+    background: var(--card);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 16px 20px;
+}
+.stat-card-label {
+    font-size: 12px; color: var(--text-muted); font-weight: 500;
+    margin-bottom: 4px;
+}
+.stat-card-value {
+    font-size: 24px; font-weight: 700; color: var(--text-primary);
+}
+.stat-card-sub {
+    font-size: 11px; color: var(--text-muted); margin-top: 2px;
+}
+.stat-card-value.green { color: var(--easy); }
+.stat-card-value.orange { color: var(--accent); }
+.stat-card-value.blue { color: var(--status-applied); }
+.stat-card-value.purple { color: var(--status-screening); }
+
+/* ── Edit Modal (wider) ── */
+.modal.modal-wide { width: 560px; }
+.modal-tabs {
+    display: flex; border-bottom: 1px solid #f0f0f0;
+    padding: 0 24px;
+}
+.modal-tab {
+    padding: 10px 14px; font-size: 13px; color: var(--text-muted);
+    border: none; background: none; font-weight: 500;
+    border-bottom: 2px solid transparent;
+}
+.modal-tab.active { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+.modal-tab-content { display: none; }
+.modal-tab-content.active { display: block; }
+
+/* ── Interview Rounds ── */
+.rounds-list { display: flex; flex-direction: column; gap: 12px; }
+.round-card {
+    background: var(--subtle-bg); border-radius: 8px; padding: 14px;
+    border: 1px solid var(--border);
+}
+.round-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+}
+.round-title { font-size: 13px; font-weight: 600; }
+.round-outcome {
+    font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500;
+}
+.round-notes { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.add-round-btn {
+    width: 100%; padding: 10px; margin-top: 8px;
+    background: none; border: 1.5px dashed var(--border);
+    border-radius: 8px; color: var(--text-muted); font-size: 13px;
+    font-weight: 500; transition: all 0.15s;
+}
+.add-round-btn:hover { border-color: var(--easy); color: var(--easy); }
+
+.round-form { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.round-form .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.round-form .form-input { font-size: 12px; padding: 7px 10px; }

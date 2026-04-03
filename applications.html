@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applications - LeetApply</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/applications.css">
+<link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="index.html" class="navbar-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffa116"><path d="M20 6H4V4h16v2zm-4 6H4v-2h12v2zm-2 6H4v-2h10v2z"/></svg>
+        LeetApply
+    </a>
+    <div class="navbar-links">
+        <a href="index.html">Dashboard</a>
+        <a href="applications.html" class="active">Applications</a>
+        <a href="#">Pipeline</a>
+        <a href="#">Analytics</a>
+    </div>
+    <div class="navbar-right">
+        <button class="navbar-add-btn" data-action="open-add-modal">+ Add Application</button>
+        <div class="search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <span>Search</span>
+        </div>
+        <div class="navbar-avatar">AF</div>
+    </div>
+</nav>
+
+<!-- Streak Warning Banner -->
+<div class="streak-banner" id="streak-banner" style="display:none">
+    <span class="streak-fire"></span>
+    <span id="streak-message"></span>
+    <button class="streak-btn" data-action="open-add-modal">Apply Now</button>
+    <button class="streak-dismiss" onclick="document.getElementById('streak-banner').style.display='none'">&times;</button>
+</div>
+
+<div class="main-container single-col">
+    <!-- Stats Cards -->
+    <div class="stats-cards" id="stats-cards">
+        <div class="stat-card">
+            <div class="stat-card-label">Total Applied</div>
+            <div class="stat-card-value blue" id="sc-total">0</div>
+            <div class="stat-card-sub">All time</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-label">Interviews</div>
+            <div class="stat-card-value purple" id="sc-interviews">0</div>
+            <div class="stat-card-sub">In progress</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-label">Offers</div>
+            <div class="stat-card-value green" id="sc-offers">0</div>
+            <div class="stat-card-sub">Received</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-label">Response Rate</div>
+            <div class="stat-card-value orange" id="sc-response">0%</div>
+            <div class="stat-card-sub">Got any response</div>
+        </div>
+    </div>
+
+    <div class="apps-header">
+        <h1>All Applications <span class="apps-count" id="apps-count">(0)</span></h1>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+        <input type="text" id="filter-search" class="filter-search" placeholder="Search company or role...">
+        <select id="filter-status" class="filter-select">
+            <option value="all">All Status</option>
+            <option value="applied">Applied</option>
+            <option value="screening">Screening</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+        </select>
+        <select id="filter-difficulty" class="filter-select">
+            <option value="all">All Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    </div>
+
+    <!-- Table -->
+    <div class="apps-table-wrap">
+        <table class="apps-table">
+            <thead>
+                <tr>
+                    <th>Company / Role</th>
+                    <th>Difficulty</th>
+                    <th>Date</th>
+                    <th>Platform</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="apps-tbody"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Add Application Modal -->
+<div class="overlay" id="add-modal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Add Application</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <form class="modal-form" id="add-app-form">
+            <div class="form-group">
+                <label>Company <span class="required">*</span></label>
+                <input type="text" name="company" class="form-input" placeholder="e.g. Google" required>
+            </div>
+            <div class="form-group">
+                <label>Role / Position <span class="required">*</span></label>
+                <input type="text" name="role" class="form-input" placeholder="e.g. SDE-2, Backend">
+            </div>
+            <div class="form-group">
+                <label>Difficulty</label>
+                <div class="diff-radio-group">
+                    <div class="diff-radio">
+                        <input type="radio" name="difficulty" value="easy" id="diff-easy">
+                        <label for="diff-easy" class="label-easy">Easy</label>
+                    </div>
+                    <div class="diff-radio">
+                        <input type="radio" name="difficulty" value="medium" id="diff-medium" checked>
+                        <label for="diff-medium" class="label-medium">Medium</label>
+                    </div>
+                    <div class="diff-radio">
+                        <input type="radio" name="difficulty" value="hard" id="diff-hard">
+                        <label for="diff-hard" class="label-hard">Hard</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Platform</label>
+                    <select name="platform" class="form-input">
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="naukri">Naukri</option>
+                        <option value="indeed">Indeed</option>
+                        <option value="internshala">Internshala</option>
+                        <option value="wellfound">Wellfound</option>
+                        <option value="direct">Direct / Career Page</option>
+                        <option value="referral">Referral</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date Applied</label>
+                    <input type="date" name="dateApplied" class="form-input">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Job Link</label>
+                <input type="url" name="link" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea name="notes" class="form-input" placeholder="Any notes about this application..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Add Application</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Application Modal -->
+<div class="overlay" id="edit-modal">
+    <div class="modal modal-wide">
+        <div class="modal-header">
+            <h2 id="edit-modal-title">Edit Application</h2>
+            <button class="modal-close" onclick="EditModal.close()">&times;</button>
+        </div>
+        <div class="modal-tabs">
+            <button class="modal-tab active" data-edit-tab="details" onclick="EditModal.switchTab('details')">Details</button>
+            <button class="modal-tab" data-edit-tab="rounds" onclick="EditModal.switchTab('rounds')">Interview Rounds</button>
+        </div>
+
+        <!-- Details Tab -->
+        <div class="modal-tab-content active" id="edit-tab-details">
+            <form class="modal-form" id="edit-app-form">
+                <input type="hidden" name="id" id="edit-id">
+                <div class="form-group">
+                    <label>Company <span class="required">*</span></label>
+                    <input type="text" name="company" id="edit-company" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Role / Position <span class="required">*</span></label>
+                    <input type="text" name="role" id="edit-role" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Difficulty</label>
+                    <div class="diff-radio-group">
+                        <div class="diff-radio">
+                            <input type="radio" name="difficulty" value="easy" id="edit-diff-easy">
+                            <label for="edit-diff-easy" class="label-easy">Easy</label>
+                        </div>
+                        <div class="diff-radio">
+                            <input type="radio" name="difficulty" value="medium" id="edit-diff-medium">
+                            <label for="edit-diff-medium" class="label-medium">Medium</label>
+                        </div>
+                        <div class="diff-radio">
+                            <input type="radio" name="difficulty" value="hard" id="edit-diff-hard">
+                            <label for="edit-diff-hard" class="label-hard">Hard</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Platform</label>
+                        <select name="platform" id="edit-platform" class="form-input">
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="naukri">Naukri</option>
+                            <option value="indeed">Indeed</option>
+                            <option value="internshala">Internshala</option>
+                            <option value="wellfound">Wellfound</option>
+                            <option value="direct">Direct / Career Page</option>
+                            <option value="referral">Referral</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Applied</label>
+                        <input type="date" name="dateApplied" id="edit-date" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Job Link</label>
+                    <input type="url" name="link" id="edit-link" class="form-input" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea name="notes" id="edit-notes" class="form-input" placeholder="Any notes..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Interview Rounds Tab -->
+        <div class="modal-tab-content" id="edit-tab-rounds">
+            <div style="padding: 20px 24px 24px;">
+                <div class="rounds-list" id="rounds-list"></div>
+                <button class="add-round-btn" id="add-round-toggle" onclick="EditModal.toggleRoundForm()">+ Add Interview Round</button>
+                <div class="round-form" id="round-form" style="display:none">
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>Round</label>
+                            <select id="round-type" class="form-input">
+                                <option value="OA">Online Assessment</option>
+                                <option value="Phone Screen">Phone Screen</option>
+                                <option value="DSA">DSA / Coding</option>
+                                <option value="System Design">System Design</option>
+                                <option value="Machine Coding">Machine Coding</option>
+                                <option value="HR">HR Round</option>
+                                <option value="Hiring Manager">Hiring Manager</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="round-date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Outcome</label>
+                            <select id="round-outcome" class="form-input">
+                                <option value="pending">Pending</option>
+                                <option value="cleared">Cleared</option>
+                                <option value="failed">Failed</option>
+                                <option value="ghosted">Ghosted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Questions / Notes</label>
+                        <textarea id="round-notes" class="form-input" placeholder="What was asked? How did it go?"></textarea>
+                    </div>
+                    <div style="display:flex;gap:8px;">
+                        <button type="button" class="form-submit" style="flex:1" onclick="EditModal.saveRound()">Add Round</button>
+                        <button type="button" class="form-submit" style="flex:0;background:var(--subtle-bg);color:var(--text-secondary)" onclick="EditModal.toggleRoundForm()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/applications.js"></script>
+<script>
+document.querySelector('#add-app-form input[name="dateApplied"]').value = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
